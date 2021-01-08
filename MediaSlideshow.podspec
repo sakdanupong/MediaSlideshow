@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "MediaSlideshow"
-  s.version          = "1.9.2"
+  s.version          = "2.0.1"
   s.summary          = "Image (and optionally, video) slideshow written in Swift with circular scrolling, timer and full screen viewer"
 
 # This description is used to generate tags and improve search results.
@@ -27,7 +27,7 @@ Media slideshow is a Swift library providing customizable image (and optionally,
   s.source           = { :git => "https://github.com/pm-dev/MediaSlideshow.git", :tag => s.version.to_s }
 
   s.swift_versions = ['4.0', '4.1', '4.2', '5', '5.1', '5.2']
-  s.platform     = :ios, '8.0'
+  s.platform     = :ios, '10.0'
   s.requires_arc = true
 
   s.subspec 'Core' do |core|

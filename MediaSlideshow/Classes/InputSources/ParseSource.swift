@@ -5,9 +5,12 @@
 //  Created by Jaime Agudo Lopez on 14/01/2017.
 //
 import Parse
+#if SWIFT_PACKAGE
+import MediaSlideshow
+#endif
 
 /// Input Source to image using Parse
-public class ParseSource: NSObject, InputSource {
+public class ParseSource: NSObject, ImageSource {
     var file: PFFileObject
     var placeholder: UIImage?
 

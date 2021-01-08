@@ -15,7 +15,7 @@ import AlamofireImage
 
 /// Input Source to image using Alamofire 3
 @objcMembers
-public class AlamofireSource: NSObject, InputSource {
+public class AlamofireSource: NSObject, ImageSource {
     /// url to load
     public var url: URL
 
