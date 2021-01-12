@@ -9,6 +9,8 @@ import Foundation
 #if SWIFT_PACKAGE
 import MediaSlideshow
 #endif
+import UIKit
+
 
 open class ImageAndVideoSlideshowDataSource: NSObject, MediaSlideshowDataSource {
     public enum Source {

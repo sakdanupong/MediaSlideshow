@@ -7,6 +7,7 @@
 
 import AVFoundation
 import Foundation
+import UIKit
 
 extension UIView {
     func embed(_ view: UIView) {

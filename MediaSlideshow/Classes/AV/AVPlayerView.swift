@@ -7,6 +7,7 @@
 
 import AVFoundation
 import Foundation
+import UIKit
 
 open class AVPlayerView: UIView {
     open override class var layerClass: AnyClass {
