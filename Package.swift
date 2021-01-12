@@ -12,16 +12,16 @@ let package = Package(
             name: "MediaSlideshow",
             targets: ["MediaSlideshow"]),
         .library(
-            name: "MediaSlideshow/Alamofire",
+            name: "MediaSlideshowAlamofire",
             targets: ["MediaSlideshowAlamofire"]),
         .library(
-            name: "MediaSlideshow/AV",
+            name: "MediaSlideshowAV",
             targets: ["MediaSlideshowAV"]),
         .library(
-            name: "MediaSlideshow/SDWebImage",
+            name: "MediaSlideshowSDWebImage",
             targets: ["MediaSlideshowSDWebImage"]),
         .library(
-            name: "MediaSlideshow/Kingfisher",
+            name: "MediaSlideshowKingfisher",
             targets: ["MediaSlideshowKingfisher"])
     ],
     dependencies: [
@@ -33,53 +33,32 @@ let package = Package(
         .target(
             name: "MediaSlideshow",
             path: "MediaSlideshow",
-            sources: [
-                "Classes/Core/ActivityIndicator.swift",
-                "Classes/Core/Bundle+Module.swift",
-                "Classes/Core/FullScreenSlideshowViewController.swift",
-                "Classes/Core/ImageSource.swift",
-                "Classes/Core/MediaSlideshow.swift",
-                "Classes/Core/MediaSlideshowImageSlide.swift",
-                "Classes/Core/MediaSlideshowSlide.swift",
-                "Classes/Core/MediaSource.swift",
-                "Classes/Core/PageIndicator.swift",
-                "Classes/Core/PageIndicatorPosition.swift",
-                "Classes/Core/SwiftSupport.swift",
-                "Classes/Core/UIImage+AspectFit.swift",
-                "Classes/Core/UIImageView+Tools.swift",
-                "Classes/Core/ZoomableMediaSlideshowSlide.swift",
-                "Classes/Core/ZoomAnimatedTransitioning.swift",
-            ],
+            sources: ["Source"],
             resources: [
-                .copy("Assets/ic_cross_white@2x.png"),
-                .copy("Assets/ic_cross_white@3x.png"),
+                .copy("Resources/ic_cross_white@2x.png"),
+                .copy("Resources/ic_cross_white@3x.png"),
             ]),
         .target(
             name: "MediaSlideshowAlamofire",
             dependencies: ["MediaSlideshow", "AlamofireImage"],
-            path: "MediaSlideshow/Classes/InputSources",
-            sources: ["AlamofireSource.swift"]),
+            path: "MediaSlideshowAlamofire",
+            sources: ["Source"]),
         .target(
             name: "MediaSlideshowAV",
             dependencies: ["MediaSlideshow"],
-            path: "MediaSlideshow/Classes/AV",
-            sources: [
-                "AVPlayerView.swift",
-                "AVSource.swift",
-                "ImageAndVideoSlideshowDataSource.swift",
-                "MediaSlideshowAVSlide.swift",
-                "UIView+AV.swift"
-            ]),
+            path: "MediaSlideshowAV",
+            sources: ["Source"],
+            resources: [.copy("Resources/AVAssets.xcassets")]),
         .target(
             name: "MediaSlideshowSDWebImage",
             dependencies: ["MediaSlideshow", "SDWebImage"],
-            path: "MediaSlideshow/Classes/InputSources",
-            sources: ["SDWebImageSource.swift"]),
+            path: "MediaSlideshowSDWebImage",
+            sources: ["Source"]),
         .target(
             name: "MediaSlideshowKingfisher",
             dependencies: ["MediaSlideshow", "Kingfisher"],
-            path: "MediaSlideshow/Classes/InputSources",
-            sources: ["KingfisherSource.swift"])
+            path: "MediaSlideshowKingfisher",
+            sources: ["Source"])
     ],
     swiftLanguageVersions: [.v4, .v4_2, .v5]
 )

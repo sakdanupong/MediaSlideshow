@@ -2,8 +2,6 @@ platform :ios, '10.0'
 use_frameworks!
 
 target 'MediaSlideshow_Example' do
-    pod "MediaSlideshow", :path => "../"
-    pod "MediaSlideshow/AFURL", :path => "../"
     pod "MediaSlideshow/Alamofire", :path => "../"
     pod "MediaSlideshow/AV", :path => "../"
     pod "MediaSlideshow/SDWebImage", :path => "../"

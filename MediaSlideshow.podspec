@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "MediaSlideshow"
-  s.version          = "2.0.5"
+  s.version          = "2.0.6"
   s.summary          = "Image (and optionally, video) slideshow written in Swift with circular scrolling, timer and full screen viewer"
 
 # This description is used to generate tags and improve search results.
@@ -31,52 +31,32 @@ Media slideshow is a Swift library providing customizable image (and optionally,
   s.requires_arc = true
 
   s.subspec 'Core' do |core|
-    core.source_files = 'MediaSlideshow/Classes/Core/**/*'
-    core.resources = 'MediaSlideshow/Assets/*.png'
-  end
-
-  s.subspec 'AFURL' do |subspec|
-    subspec.dependency 'MediaSlideshow/Core'
-    subspec.dependency 'AFNetworking', '~> 3.0'
-    subspec.source_files = 'MediaSlideshow/Classes/InputSources/AFURLSource.swift'
-  end
-
-  s.subspec 'Alamofire3' do |subspec|
-    subspec.dependency 'MediaSlideshow/Core'
-    subspec.dependency 'AlamofireImage', '~> 3.0'
-    subspec.source_files = 'MediaSlideshow/Classes/InputSources/AlamofireLegacySource.swift'
+    core.source_files = 'MediaSlideshow/Source/**/*'
+    core.resources = 'MediaSlideshow/Resources/*.png'
   end
 
   s.subspec 'Alamofire' do |subspec|
     subspec.dependency 'MediaSlideshow/Core'
     subspec.dependency 'AlamofireImage', '~> 4.0'
-    subspec.platform     = :ios, '10.0'
-    subspec.source_files = 'MediaSlideshow/Classes/InputSources/AlamofireSource.swift'
+    subspec.source_files = 'MediaSlideshowAlamofire/Source/**/*.swift'
   end
 
   s.subspec 'AV' do |subspec|
     subspec.dependency 'MediaSlideshow/Core'
-    subspec.source_files = 'MediaSlideshow/Classes/AV/**/*.swift'
-    subspec.resources = 'MediaSlideshow/Assets/AVAssets.xcassets'
+    subspec.source_files = 'MediaSlideshowAV/Source/**/*.swift'
+    subspec.resources = 'MediaSlideshowAV/Resources/AVAssets.xcassets'
   end
 
   s.subspec 'SDWebImage' do |subspec|
     subspec.dependency 'MediaSlideshow/Core'
     subspec.dependency 'SDWebImage', '>= 3.7'
-    subspec.source_files = 'MediaSlideshow/Classes/InputSources/SDWebImageSource.swift'
+    subspec.source_files = 'MediaSlideshowSDWebImage/Source/**/*.swift'
   end
 
   s.subspec 'Kingfisher' do |subspec|
     subspec.dependency 'MediaSlideshow/Core'
     subspec.dependency 'Kingfisher', '> 3.0'
-    subspec.platform     = :ios, '10.0'
-    subspec.source_files = 'MediaSlideshow/Classes/InputSources/KingfisherSource.swift'
-  end
-
-  s.subspec 'Parse' do |subspec|
-    subspec.dependency 'MediaSlideshow/Core'
-    subspec.dependency 'Parse', '~> 1.14'
-    subspec.source_files = 'MediaSlideshow/Classes/InputSources/ParseSource.swift'
+    subspec.source_files = 'MediaSlideshowKingfisher/Source/**/*.swift'
   end
 
   s.default_subspec = 'Core'
