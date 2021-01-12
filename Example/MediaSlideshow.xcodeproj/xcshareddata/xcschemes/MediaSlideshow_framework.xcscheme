@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D0E8A9E11D97EB6D007EC517"
-               BuildableName = "MediaSlideshow-framework.framework"
+               BuildableName = "MediaSlideshow.framework"
                BlueprintName = "MediaSlideshow_framework"
                ReferencedContainer = "container:MediaSlideshow.xcodeproj">
             </BuildableReference>
@@ -51,7 +51,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D0E8A9E11D97EB6D007EC517"
-            BuildableName = "MediaSlideshow-framework.framework"
+            BuildableName = "MediaSlideshow.framework"
             BlueprintName = "MediaSlideshow_framework"
             ReferencedContainer = "container:MediaSlideshow.xcodeproj">
          </BuildableReference>
