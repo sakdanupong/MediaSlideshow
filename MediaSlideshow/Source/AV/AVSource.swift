@@ -7,9 +7,6 @@
 
 import AVFoundation
 import Foundation
-#if SWIFT_PACKAGE
-import MediaSlideshow
-#endif
 
 @objcMembers
 open class AVSource: NSObject, MediaSource {

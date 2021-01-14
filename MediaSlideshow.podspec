@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "MediaSlideshow"
-  s.version          = "2.0.6"
+  s.version          = "2.0.7"
   s.summary          = "Image (and optionally, video) slideshow written in Swift with circular scrolling, timer and full screen viewer"
 
 # This description is used to generate tags and improve search results.
@@ -32,19 +32,13 @@ Media slideshow is a Swift library providing customizable image (and optionally,
 
   s.subspec 'Core' do |core|
     core.source_files = 'MediaSlideshow/Source/**/*'
-    core.resources = 'MediaSlideshow/Resources/*.png'
+    core.resources = 'MediaSlideshow/Resources/*.*'
   end
 
   s.subspec 'Alamofire' do |subspec|
     subspec.dependency 'MediaSlideshow/Core'
     subspec.dependency 'AlamofireImage', '~> 4.0'
     subspec.source_files = 'MediaSlideshowAlamofire/Source/**/*.swift'
-  end
-
-  s.subspec 'AV' do |subspec|
-    subspec.dependency 'MediaSlideshow/Core'
-    subspec.source_files = 'MediaSlideshowAV/Source/**/*.swift'
-    subspec.resources = 'MediaSlideshowAV/Resources/AVAssets.xcassets'
   end
 
   s.subspec 'SDWebImage' do |subspec|

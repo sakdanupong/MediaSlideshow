@@ -7,9 +7,6 @@
 
 import AVFoundation
 import AVKit
-#if SWIFT_PACKAGE
-import MediaSlideshow
-#endif
 import UIKit
 
 public class MediaSlideshowAVSlide: AVPlayerView, MediaSlideshowSlide {

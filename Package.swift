@@ -15,9 +15,6 @@ let package = Package(
             name: "MediaSlideshowAlamofire",
             targets: ["MediaSlideshowAlamofire"]),
         .library(
-            name: "MediaSlideshowAV",
-            targets: ["MediaSlideshowAV"]),
-        .library(
             name: "MediaSlideshowSDWebImage",
             targets: ["MediaSlideshowSDWebImage"]),
         .library(
@@ -37,18 +34,13 @@ let package = Package(
             resources: [
                 .copy("Resources/ic_cross_white@2x.png"),
                 .copy("Resources/ic_cross_white@3x.png"),
+                .copy("Resources/AVAssets.xcassets")
             ]),
         .target(
             name: "MediaSlideshowAlamofire",
             dependencies: ["MediaSlideshow", "AlamofireImage"],
             path: "MediaSlideshowAlamofire",
             sources: ["Source"]),
-        .target(
-            name: "MediaSlideshowAV",
-            dependencies: ["MediaSlideshow"],
-            path: "MediaSlideshowAV",
-            sources: ["Source"],
-            resources: [.copy("Resources/AVAssets.xcassets")]),
         .target(
             name: "MediaSlideshowSDWebImage",
             dependencies: ["MediaSlideshow", "SDWebImage"],

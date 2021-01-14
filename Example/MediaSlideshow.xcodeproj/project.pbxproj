@@ -15,6 +15,11 @@
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		D007954F2043262C0053E25F /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D007954E2043262C0053E25F /* TableViewController.swift */; };
+		D0B653BE25B02D55009B7B8E /* ImageAndVideoSlideshowDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B653B925B02D55009B7B8E /* ImageAndVideoSlideshowDataSource.swift */; };
+		D0B653BF25B02D55009B7B8E /* AVSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B653BA25B02D55009B7B8E /* AVSource.swift */; };
+		D0B653C025B02D55009B7B8E /* MediaSlideshowAVSlide.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B653BB25B02D55009B7B8E /* MediaSlideshowAVSlide.swift */; };
+		D0B653C125B02D55009B7B8E /* UIView+Embed.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B653BC25B02D55009B7B8E /* UIView+Embed.swift */; };
+		D0B653C225B02D55009B7B8E /* AVPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B653BD25B02D55009B7B8E /* AVPlayerView.swift */; };
 		D0D1783225AE623200D1CC41 /* PageIndicatorPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D1782325AE623200D1CC41 /* PageIndicatorPosition.swift */; };
 		D0D1783325AE623200D1CC41 /* ZoomAnimatedTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D1782425AE623200D1CC41 /* ZoomAnimatedTransitioning.swift */; };
 		D0D1783425AE623200D1CC41 /* MediaSlideshowImageSlide.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D1782525AE623200D1CC41 /* MediaSlideshowImageSlide.swift */; };
@@ -56,11 +61,16 @@
 		607FACE51AFB9204008FA782 /* MediaSlideshow_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MediaSlideshow_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		607FACEA1AFB9204008FA782 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		607FACEB1AFB9204008FA782 /* Tests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests.swift; sourceTree = "<group>"; };
-		749E212B852A3FE6757C1D36 /* MediaSlideshow.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = MediaSlideshow.podspec; path = ../MediaSlideshow.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		749E212B852A3FE6757C1D36 /* MediaSlideshow.podspec */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = MediaSlideshow.podspec; path = ../MediaSlideshow.podspec; sourceTree = "<group>"; };
 		849446B5B7637593F7BAFDB3 /* Pods-MediaSlideshow_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediaSlideshow_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-MediaSlideshow_Example/Pods-MediaSlideshow_Example.release.xcconfig"; sourceTree = "<group>"; };
 		9270D5766E1704EF6EC6E915 /* Pods_MediaSlideshow_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MediaSlideshow_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD2DC6E3EA36E63AC62DF1C7 /* Pods-MediaSlideshow_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediaSlideshow_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MediaSlideshow_Example/Pods-MediaSlideshow_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		D007954E2043262C0053E25F /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		D0B653B925B02D55009B7B8E /* ImageAndVideoSlideshowDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAndVideoSlideshowDataSource.swift; sourceTree = "<group>"; };
+		D0B653BA25B02D55009B7B8E /* AVSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVSource.swift; sourceTree = "<group>"; };
+		D0B653BB25B02D55009B7B8E /* MediaSlideshowAVSlide.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaSlideshowAVSlide.swift; sourceTree = "<group>"; };
+		D0B653BC25B02D55009B7B8E /* UIView+Embed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Embed.swift"; sourceTree = "<group>"; };
+		D0B653BD25B02D55009B7B8E /* AVPlayerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVPlayerView.swift; sourceTree = "<group>"; };
 		D0D1782325AE623200D1CC41 /* PageIndicatorPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageIndicatorPosition.swift; sourceTree = "<group>"; };
 		D0D1782425AE623200D1CC41 /* ZoomAnimatedTransitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomAnimatedTransitioning.swift; sourceTree = "<group>"; };
 		D0D1782525AE623200D1CC41 /* MediaSlideshowImageSlide.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaSlideshowImageSlide.swift; sourceTree = "<group>"; };
@@ -198,9 +208,22 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		D0B653C625B02E35009B7B8E /* AV */ = {
+			isa = PBXGroup;
+			children = (
+				D0B653BD25B02D55009B7B8E /* AVPlayerView.swift */,
+				D0B653BA25B02D55009B7B8E /* AVSource.swift */,
+				D0B653B925B02D55009B7B8E /* ImageAndVideoSlideshowDataSource.swift */,
+				D0B653BB25B02D55009B7B8E /* MediaSlideshowAVSlide.swift */,
+				D0B653BC25B02D55009B7B8E /* UIView+Embed.swift */,
+			);
+			path = AV;
+			sourceTree = "<group>";
+		};
 		D0E8A9E31D97EB6D007EC517 /* MediaSlideshow_framework */ = {
 			isa = PBXGroup;
 			children = (
+				D0B653C625B02E35009B7B8E /* AV */,
 				D0D1782B25AE623200D1CC41 /* ActivityIndicator.swift */,
 				D0D1782925AE623200D1CC41 /* Bundle+Module.swift */,
 				D0D1782C25AE623200D1CC41 /* FullScreenSlideshowViewController.swift */,
@@ -437,18 +460,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D0B653BF25B02D55009B7B8E /* AVSource.swift in Sources */,
 				D0D1783E25AE623200D1CC41 /* ImageSource.swift in Sources */,
 				D0D1783925AE623200D1CC41 /* PageIndicator.swift in Sources */,
 				D0D1783225AE623200D1CC41 /* PageIndicatorPosition.swift in Sources */,
+				D0B653C225B02D55009B7B8E /* AVPlayerView.swift in Sources */,
 				D0D1783D25AE623200D1CC41 /* UIImageView+Tools.swift in Sources */,
 				D0D1783525AE623200D1CC41 /* MediaSource.swift in Sources */,
+				D0B653C025B02D55009B7B8E /* MediaSlideshowAVSlide.swift in Sources */,
 				D0D1783F25AE623200D1CC41 /* SwiftSupport.swift in Sources */,
 				D0D1783725AE623200D1CC41 /* ZoomableMediaSlideshowSlide.swift in Sources */,
 				D0D1783825AE623200D1CC41 /* Bundle+Module.swift in Sources */,
 				D0D1783625AE623200D1CC41 /* MediaSlideshow.swift in Sources */,
 				D0D1783325AE623200D1CC41 /* ZoomAnimatedTransitioning.swift in Sources */,
 				D0D1783A25AE623200D1CC41 /* ActivityIndicator.swift in Sources */,
+				D0B653BE25B02D55009B7B8E /* ImageAndVideoSlideshowDataSource.swift in Sources */,
 				D0D1783B25AE623200D1CC41 /* FullScreenSlideshowViewController.swift in Sources */,
+				D0B653C125B02D55009B7B8E /* UIView+Embed.swift in Sources */,
 				D0D1784025AE623200D1CC41 /* UIImage+AspectFit.swift in Sources */,
 				D0D1783C25AE623200D1CC41 /* MediaSlideshowSlide.swift in Sources */,
 				D0D1783425AE623200D1CC41 /* MediaSlideshowImageSlide.swift in Sources */,

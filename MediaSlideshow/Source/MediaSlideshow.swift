@@ -404,10 +404,10 @@ open class MediaSlideshow: UIView {
             scrollViewMedias = sources
         }
 
+        setTimerIfNeeded()
         reloadScrollView()
         layoutScrollView()
         layoutPageControl()
-        setTimerIfNeeded()
     }
 
     // MARK: paging methods

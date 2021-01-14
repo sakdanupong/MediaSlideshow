@@ -14,14 +14,14 @@ MediaSlideshow is available through [CocoaPods](http://cocoapods.org). To instal
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'MediaSlideshow', '~> 2.0.6'
+pod 'MediaSlideshow', '~> 2.0.7'
 ```
 
 ### Carthage
 To integrate MediaSlideshow into your Xcode project using Carthage, specify it in your Cartfile:
 
 ```ruby
-github "pm-dev/MediaSlideshow" ~> 2.0.6
+github "pm-dev/MediaSlideshow" ~> 2.0.7
 ```
 
 Carthage does not include InputSources for external providers (due to dependency on those providers) so you need to grab the one you need from `MediaSlideshow/Classes/InputSources` manually.
