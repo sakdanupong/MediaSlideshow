@@ -282,4 +282,8 @@ open class ImageMediaSlideshowDataSource: NSObject, MediaSlideshowDataSource {
         slide.imageView.contentMode = mediaSlideshow.contentScaleMode
         return slide
     }
+
+    public func dataSourceForFullscreen(_ fullscreenSlideshow: MediaSlideshow) -> MediaSlideshowDataSource {
+        self
+    }
 }

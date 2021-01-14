@@ -10,49 +10,47 @@ import AVKit
 import UIKit
 
 public class MediaSlideshowAVSlide: AVPlayerView, MediaSlideshowSlide {
+    public enum Playback {
+        case play(muted: Bool)
+        case paused
+    }
     private let source: AVSource
     private var playerTimeControlStatusObservation: NSKeyValueObservation?
-    private let activityIndicator: ActivityIndicatorView?
-    private let pausedOverlayView: UIView?
+    private var playerTimeObserver: Any?
+    private let overlayView: AVSlideOverlayView?
     private let transitionView: UIImageView
+    private let onAppear: Playback
 
     public init(
         source: AVSource,
-        pausedOverlayView: UIView? = nil,
-        activityIndicator: ActivityIndicatorView? = nil,
+        onAppear: Playback = .paused,
+        overlayView: AVSlideOverlayView? = nil,
         mediaContentMode: UIView.ContentMode) {
         self.source = source
+        self.onAppear = onAppear
         self.mediaContentMode = mediaContentMode
-        self.activityIndicator = activityIndicator
-        self.pausedOverlayView = pausedOverlayView
+        self.overlayView = overlayView
         self.transitionView = UIImageView()
         super.init(frame: .zero)
-        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSingleTap)))
         player = source.player
         setPlayerViewVideoGravity()
         // Stays hidden, but needs to be apart of the view heirarchy due to how the zoom animation works.
         transitionView.isHidden = true
         embed(transitionView)
-        if let pausedOverlayView = pausedOverlayView {
-            embed(pausedOverlayView)
+        if let overlayView = overlayView {
+            embed(overlayView)
         }
-        if let activityView = activityIndicator?.view {
-            embed(activityView)
+        let interval = CMTime(seconds: 0.5, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
+        playerTimeObserver = source.player.addPeriodicTimeObserver(
+            forInterval: interval,
+            queue: .main) { [weak self] time in
+            guard let self = self else { return }
+            self.overlayView?.playerDidUpdateToTime(
+                self.source.item.currentTime(),
+                duration: self.source.item.duration)
         }
         playerTimeControlStatusObservation = source.player.observe(\.timeControlStatus) { [weak self] player, _ in
-            guard let self = self else { return }
-            switch player.timeControlStatus {
-            case .waitingToPlayAtSpecifiedRate:
-                self.activityIndicator?.show()
-                self.pausedOverlayView?.isHidden = true
-            case .playing:
-                self.activityIndicator?.hide()
-                self.pausedOverlayView?.isHidden = true
-            case .paused:
-                self.activityIndicator?.hide()
-                self.pausedOverlayView?.isHidden = false
-            @unknown default: break
-            }
+            self?.overlayView?.playerDidUpdateStatus(player.timeControlStatus)
         }
         NotificationCenter.default.addObserver(
             self,
@@ -68,16 +66,6 @@ public class MediaSlideshowAVSlide: AVPlayerView, MediaSlideshowSlide {
     @objc
     private func playerItemDidPlayToEndTime(notification: Notification) {
         source.player.seek(to: .zero)        
-    }
-
-    @objc
-    private func didSingleTap() {
-        switch source.player.timeControlStatus {
-        case .paused: source.player.play()
-        case .playing: source.player.pause()
-        case .waitingToPlayAtSpecifiedRate: break
-        @unknown default: break
-        }
     }
     
     private func setPlayerViewVideoGravity() {
@@ -121,8 +109,13 @@ public class MediaSlideshowAVSlide: AVPlayerView, MediaSlideshowSlide {
 
     public func didAppear(in slideshow: MediaSlideshow) {
         slideshow.pauseTimer()
-        if source.autoplay {
+        switch onAppear {
+        case .play(let muted):
             source.player.play()
+            source.player.isMuted = muted
+        case .paused:
+            source.player.pause()
+        default: break
         }
     }
 

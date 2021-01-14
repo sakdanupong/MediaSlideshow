@@ -10,20 +10,17 @@ import Foundation
 
 @objcMembers
 open class AVSource: NSObject, MediaSource {
-
-    public let autoplay: Bool
     public let asset: AVAsset
     public private(set) lazy var item = AVPlayerItem(asset: asset)
     public private(set) lazy var player = AVPlayer(playerItem: item)
 
-    public init(asset: AVAsset, autoplay: Bool) {
+    public init(asset: AVAsset) {
         self.asset = asset
-        self.autoplay = autoplay
         super.init()
     }
 
-    public convenience init(url: URL, autoplay: Bool) {
-        self.init(asset: AVAsset(url: url), autoplay: autoplay)
+    public convenience init(url: URL) {
+        self.init(asset: AVAsset(url: url))
     }
 }
 

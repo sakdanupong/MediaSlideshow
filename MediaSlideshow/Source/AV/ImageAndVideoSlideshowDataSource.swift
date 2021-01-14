@@ -15,9 +15,14 @@ open class ImageAndVideoSlideshowDataSource: NSObject, MediaSlideshowDataSource 
     }
 
     open var sources: [Source]
+    open var onAVAppear: MediaSlideshowAVSlide.Playback
+    private lazy var fullscreen: MediaSlideshowDataSource = Self.init(
+        sources: sources,
+        onAVAppear: .play(muted: false))
 
-    public init(sources: [Source]) {
+    public required init(sources: [Source], onAVAppear: MediaSlideshowAVSlide.Playback) {
         self.sources = sources
+        self.onAVAppear = onAVAppear
         super.init()
     }
 
@@ -41,18 +46,16 @@ open class ImageAndVideoSlideshowDataSource: NSObject, MediaSlideshowDataSource 
             return slide
         }
         if let av = source as? AVSource {
-            let image = UIImage(
-                named: "video-play",
-                in: Bundle(for: Self.self),
-                compatibleWith: nil)
-            let pausedOverlayView = UIImageView(image: image)
-            pausedOverlayView.contentMode = .center
             return MediaSlideshowAVSlide(
                 source: av,
-                pausedOverlayView: pausedOverlayView,
-                activityIndicator: mediaSlideshow.activityIndicator?.create(),
+                onAppear: onAVAppear,
+                overlayView: StandardAVSlideOverlayView(activityView: mediaSlideshow.activityIndicator?.create()),
                 mediaContentMode: mediaSlideshow.contentScaleMode)
         }
         fatalError("Unrecognized source")
+    }
+
+    public func dataSourceForFullscreen(_ fullscreenSlideshow: MediaSlideshow) -> MediaSlideshowDataSource {
+        fullscreen
     }
 }

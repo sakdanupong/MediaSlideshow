@@ -13,6 +13,8 @@ public protocol MediaSlideshowDataSource: class {
     @objc func sourcesInMediaSlideshow(_ mediaSlideshow: MediaSlideshow) -> [MediaSource]
 
     @objc func slideForSource(_ source: MediaSource, in mediaSlideshow: MediaSlideshow) -> MediaSlideshowSlideView
+
+    @objc func dataSourceForFullscreen(_ fullscreenSlideshow: MediaSlideshow) -> MediaSlideshowDataSource
 }
 
 @objc
@@ -567,7 +569,7 @@ open class MediaSlideshow: UIView {
         }
 
         fullscreen.initialPage = currentPage
-        fullscreen.dataSource = dataSource
+        fullscreen.dataSource = dataSource?.dataSourceForFullscreen(fullscreen.slideshow)
         slideshowTransitioningDelegate = ZoomAnimatedTransitioningDelegate(slideshowView: self, slideshowController: fullscreen)
         fullscreen.transitioningDelegate = slideshowTransitioningDelegate
         fullscreen.modalPresentationStyle = .custom
