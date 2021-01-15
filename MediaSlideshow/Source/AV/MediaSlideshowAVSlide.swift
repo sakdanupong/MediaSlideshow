@@ -45,9 +45,11 @@ public class MediaSlideshowAVSlide: AVPlayerView, MediaSlideshowSlide {
             forInterval: interval,
             queue: .main) { [weak self] time in
             guard let self = self else { return }
+            let currentTime = self.source.item.currentTime().seconds
+            let duration = self.source.item.duration.seconds
             self.overlayView?.playerDidUpdateToTime(
-                self.source.item.currentTime(),
-                duration: self.source.item.duration)
+                currentTime,
+                duration: (duration.isNaN || duration.isInfinite) ? nil : duration)
         }
         playerTimeControlStatusObservation = source.player.observe(\.timeControlStatus) { [weak self] player, _ in
             self?.overlayView?.playerDidUpdateStatus(player.timeControlStatus)
@@ -115,7 +117,6 @@ public class MediaSlideshowAVSlide: AVPlayerView, MediaSlideshowSlide {
             source.player.isMuted = muted
         case .paused:
             source.player.pause()
-        default: break
         }
     }
 

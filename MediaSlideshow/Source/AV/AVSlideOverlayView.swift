@@ -11,7 +11,7 @@ import Foundation
 import UIKit
 
 public protocol AVSlideOverlayView: UIView {
-    func playerDidUpdateToTime(_ time: CMTime, duration: CMTime)
+    func playerDidUpdateToTime(_ currentTime: TimeInterval, duration: TimeInterval?)
     func playerDidUpdateStatus(_ status: AVPlayer.TimeControlStatus)
 }
 
@@ -46,9 +46,9 @@ open class StandardAVSlideOverlayView: UIView, AVSlideOverlayView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    public func playerDidUpdateToTime(_ time: CMTime, duration: CMTime) {
-        playView?.playerDidUpdateToTime(time, duration: duration)
-        pauseView?.playerDidUpdateToTime(time, duration: duration)
+    public func playerDidUpdateToTime(_ currentTime: TimeInterval, duration: TimeInterval?) {
+        playView?.playerDidUpdateToTime(currentTime, duration: duration)
+        pauseView?.playerDidUpdateToTime(currentTime, duration: duration)
     }
 
     public func playerDidUpdateStatus(_ status: AVPlayer.TimeControlStatus) {
@@ -109,12 +109,16 @@ public class AVSlidePlayingOverlayView: UIView, AVSlideOverlayView {
         countdownLabel.frame = labelFrame
     }
 
-    public func playerDidUpdateToTime(_ time: CMTime, duration: CMTime) {
-        let secondsRemaining = Int(duration.seconds - time.seconds)
+    public func playerDidUpdateToTime(_ currentTime: TimeInterval, duration: TimeInterval?) {
+        guard let duration = duration else {
+            countdownLabel.text = nil
+            return
+        }
+        let secondsRemaining = Int(duration - currentTime)
         let minutes = String(secondsRemaining / 60)
         let seconds = String(secondsRemaining % 60)
         let under10 = secondsRemaining % 60 < 10
-        self.countdownLabel.text = minutes + (under10 ? ":0" : ":") + seconds
+        countdownLabel.text = minutes + (under10 ? ":0" : ":") + seconds
     }
 
     public func playerDidUpdateStatus(_ status: AVPlayer.TimeControlStatus) {
@@ -140,7 +144,7 @@ public class AVSlidePausedOverlayView: UIView, AVSlideOverlayView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    public func playerDidUpdateToTime(_ time: CMTime, duration: CMTime) {}
+    public func playerDidUpdateToTime(_ currentTime: TimeInterval, duration: TimeInterval?) {}
 
     public func playerDidUpdateStatus(_ status: AVPlayer.TimeControlStatus) {
         switch status {
