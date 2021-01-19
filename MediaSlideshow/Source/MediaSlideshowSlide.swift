@@ -16,15 +16,15 @@ public protocol MediaSlideshowSlide {
 
     func transitionImageView() -> UIImageView
 
-    func willBeRemoved(from slideshow: MediaSlideshow)
+    func willBeRemoved()
 
     func loadMedia()
 
     func releaseMedia()
 
-    func didAppear(in slideshow: MediaSlideshow)
+    func didAppear()
 
-    func didDisappear(in slideshow: MediaSlideshow)
+    func didDisappear()
 
     func willStartFullscreenTransition(_ type: FullscreenTransitionType)
 }

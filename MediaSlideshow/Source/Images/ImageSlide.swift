@@ -176,7 +176,7 @@ open class ImageSlide: UIScrollView, UIScrollViewDelegate, ZoomableMediaSlidesho
         self.imageView.image = nil
     }
 
-    public func willBeRemoved(from slideshow: MediaSlideshow) {
+    public func willBeRemoved() {
         cancelPendingLoad()
     }
 
@@ -184,9 +184,9 @@ open class ImageSlide: UIScrollView, UIScrollViewDelegate, ZoomableMediaSlidesho
         self.loadMedia()
     }
 
-    public func didAppear(in slideshow: MediaSlideshow) {}
+    public func didAppear() {}
 
-    public func didDisappear(in slideshow: MediaSlideshow) {
+    public func didDisappear() {
         zoomOut()
     }
 

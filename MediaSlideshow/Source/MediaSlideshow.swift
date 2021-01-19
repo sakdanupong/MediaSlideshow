@@ -335,7 +335,7 @@ open class MediaSlideshow: UIView {
 
         loadMedia(for: scrollViewPage)
         if slides.count > scrollViewPage {
-            slides[scrollViewPage].didAppear(in: self)
+            slides[scrollViewPage].didAppear()
         }
     }
 
@@ -429,10 +429,10 @@ open class MediaSlideshow: UIView {
     fileprivate func setCurrentPageForScrollViewPage(_ page: Int) {
         if scrollViewPage != page {
             if slides.count > scrollViewPage {
-                slides[scrollViewPage].didDisappear(in: self)
+                slides[scrollViewPage].didDisappear()
             }
             if slides.count > page {
-                slides[page].didAppear(in: self)
+                slides[page].didAppear()
             }
         }
 

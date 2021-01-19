@@ -86,7 +86,7 @@ public class AVPlayerSlide: AVPlayerView, MediaSlideshowSlide {
         }
     }
 
-    public func willBeRemoved(from slideshow: MediaSlideshow) {}
+    public func willBeRemoved() {}
 
     public func loadMedia() {
         _ = source.player
@@ -109,7 +109,7 @@ public class AVPlayerSlide: AVPlayerView, MediaSlideshowSlide {
         source.player.pause()
     }
 
-    public func didAppear(in slideshow: MediaSlideshow) {
+    public func didAppear() {
         switch onAppear {
         case .play(let muted):
             source.player.play()
@@ -119,7 +119,7 @@ public class AVPlayerSlide: AVPlayerView, MediaSlideshowSlide {
         }
     }
 
-    public func didDisappear(in slideshow: MediaSlideshow) {
+    public func didDisappear() {
         source.player.pause()
     }
 }

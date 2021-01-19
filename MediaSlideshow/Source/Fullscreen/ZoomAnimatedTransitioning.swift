@@ -256,9 +256,9 @@ class ZoomInAnimator: ZoomAnimator, UIViewControllerAnimatedTransitioning {
             containerView.addSubview(toViewController.view)
             if completed {
                 if let fromSlideshow = self.referenceSlideshowView {
-                    fromSlideshow.currentSlide?.didDisappear(in: fromSlideshow)
+                    fromSlideshow.currentSlide?.didDisappear()
                 }
-                toViewController.slideshow.currentSlide?.didAppear(in: toViewController.slideshow)
+                toViewController.slideshow.currentSlide?.didAppear()
             }
             transitionContext.completeTransition(completed)
         })
@@ -363,9 +363,9 @@ class ZoomOutAnimator: ZoomAnimator, UIViewControllerAnimatedTransitioning {
                 fromViewController.view.removeFromSuperview()
                 UIApplication.shared.keyWindow?.removeGestureRecognizer(self.parent.gestureRecognizer)
 
-                fromViewController.slideshow.currentSlide?.didDisappear(in: fromViewController.slideshow)
+                fromViewController.slideshow.currentSlide?.didDisappear()
                 if let toSlideshow = self.referenceSlideshowView {
-                    toSlideshow.currentSlide?.didAppear(in: toSlideshow)
+                    toSlideshow.currentSlide?.didAppear()
                 }
             } else {
                 fromViewController.view.isHidden = false
