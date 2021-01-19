@@ -22,7 +22,7 @@ extension MediaSlideshow {
         }
 
         fullscreen.initialPage = currentPage
-        fullscreen.dataSource = dataSource?.dataSourceForFullscreen(fullscreen.slideshow)
+        fullscreen.setMediaSources(sources)
         slideshowTransitioningDelegate = ZoomAnimatedTransitioningDelegate(slideshowView: self, slideshowController: fullscreen)
         fullscreen.transitioningDelegate = slideshowTransitioningDelegate
         fullscreen.modalPresentationStyle = .custom

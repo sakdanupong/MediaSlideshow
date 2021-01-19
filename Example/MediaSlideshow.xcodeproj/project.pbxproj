@@ -15,7 +15,6 @@
 		607FACE01AFB9204008FA782 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 607FACDE1AFB9204008FA782 /* LaunchScreen.xib */; };
 		607FACEC1AFB9204008FA782 /* Tests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 607FACEB1AFB9204008FA782 /* Tests.swift */; };
 		D007954F2043262C0053E25F /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D007954E2043262C0053E25F /* TableViewController.swift */; };
-		D0B653BE25B02D55009B7B8E /* ImageAndVideoSlideshowDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B653B925B02D55009B7B8E /* ImageAndVideoSlideshowDataSource.swift */; };
 		D0B653BF25B02D55009B7B8E /* AVSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B653BA25B02D55009B7B8E /* AVSource.swift */; };
 		D0B653C025B02D55009B7B8E /* AVPlayerSlide.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B653BB25B02D55009B7B8E /* AVPlayerSlide.swift */; };
 		D0B653C125B02D55009B7B8E /* UIView+Embed.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0B653BC25B02D55009B7B8E /* UIView+Embed.swift */; };
@@ -69,7 +68,6 @@
 		9270D5766E1704EF6EC6E915 /* Pods_MediaSlideshow_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MediaSlideshow_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD2DC6E3EA36E63AC62DF1C7 /* Pods-MediaSlideshow_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MediaSlideshow_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MediaSlideshow_Example/Pods-MediaSlideshow_Example.debug.xcconfig"; sourceTree = "<group>"; };
 		D007954E2043262C0053E25F /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
-		D0B653B925B02D55009B7B8E /* ImageAndVideoSlideshowDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageAndVideoSlideshowDataSource.swift; sourceTree = "<group>"; };
 		D0B653BA25B02D55009B7B8E /* AVSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVSource.swift; sourceTree = "<group>"; };
 		D0B653BB25B02D55009B7B8E /* AVPlayerSlide.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AVPlayerSlide.swift; sourceTree = "<group>"; };
 		D0B653BC25B02D55009B7B8E /* UIView+Embed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Embed.swift"; sourceTree = "<group>"; };
@@ -220,7 +218,6 @@
 				D0BD3E6225B0C94400936AC7 /* AVAssets.xcassets */,
 				D0B653BD25B02D55009B7B8E /* AVPlayerView.swift */,
 				D0B653BA25B02D55009B7B8E /* AVSource.swift */,
-				D0B653B925B02D55009B7B8E /* ImageAndVideoSlideshowDataSource.swift */,
 				D0B653BB25B02D55009B7B8E /* AVPlayerSlide.swift */,
 				D0B653BC25B02D55009B7B8E /* UIView+Embed.swift */,
 				D0BD3E9125B0DA8A00936AC7 /* AVSlideOverlayView.swift */,
@@ -502,7 +499,6 @@
 				D0D1783625AE623200D1CC41 /* MediaSlideshow.swift in Sources */,
 				D0D1783325AE623200D1CC41 /* ZoomAnimatedTransitioning.swift in Sources */,
 				D0D1783A25AE623200D1CC41 /* ActivityIndicator.swift in Sources */,
-				D0B653BE25B02D55009B7B8E /* ImageAndVideoSlideshowDataSource.swift in Sources */,
 				D0D1783B25AE623200D1CC41 /* FullScreenSlideshowViewController.swift in Sources */,
 				D0B653C125B02D55009B7B8E /* UIView+Embed.swift in Sources */,
 				D0D1784025AE623200D1CC41 /* UIImage+AspectFit.swift in Sources */,

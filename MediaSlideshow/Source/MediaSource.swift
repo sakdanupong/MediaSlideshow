@@ -8,5 +8,7 @@
 import Foundation
 
 /// A protocol that marks a media item in the slideshow.
-@objc public protocol MediaSource {
+public protocol MediaSource {
+
+    func slide(in slideshow: MediaSlideshow) -> MediaSlideshowSlide
 }

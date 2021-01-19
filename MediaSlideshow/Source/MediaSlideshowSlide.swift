@@ -7,10 +7,7 @@
 
 import UIKit
 
-public typealias MediaSlideshowSlideView = MediaSlideshowSlide & UIView
-
-@objc
-public protocol MediaSlideshowSlide {
+public protocol MediaSlideshowSlide: UIView {
 
     var mediaContentMode: UIView.ContentMode { get set }
 

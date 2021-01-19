@@ -8,16 +8,6 @@
 import UIKit
 
 @objc
-public protocol MediaSlideshowDataSource: class {
-
-    @objc func sourcesInMediaSlideshow(_ mediaSlideshow: MediaSlideshow) -> [MediaSource]
-
-    @objc func slideForSource(_ source: MediaSource, in mediaSlideshow: MediaSlideshow) -> MediaSlideshowSlideView
-
-    @objc func dataSourceForFullscreen(_ fullscreenSlideshow: MediaSlideshow) -> MediaSlideshowDataSource
-}
-
-@objc
 /// The delegate protocol informing about slideshow state changes
 public protocol MediaSlideshowDelegate: class {
     /// Tells the delegate that the current page has changed
@@ -137,9 +127,6 @@ open class MediaSlideshow: UIView {
     /// Delegate called on slideshow state change
     open weak var delegate: MediaSlideshowDelegate?
 
-    /// Datasource used when reloadData is called
-    open weak var dataSource: MediaSlideshowDataSource?
-
     /// Called on each currentPage change
     open var currentPageChanged: ((_ page: Int) -> Void)?
 
@@ -150,7 +137,7 @@ open class MediaSlideshow: UIView {
     open var didEndDecelerating: (() -> Void)?
 
     /// Currenlty displayed slideshow item
-    open var currentSlide: MediaSlideshowSlideView? {
+    open var currentSlide: MediaSlideshowSlide? {
         if slides.count > scrollViewPage {
             return slides[scrollViewPage]
         } else {
@@ -165,7 +152,7 @@ open class MediaSlideshow: UIView {
     open fileprivate(set) var sources = [MediaSource]()
 
     /// Image Slideshow Items loaded to slideshow
-    open fileprivate(set) var slides = [MediaSlideshowSlideView]()
+    open fileprivate(set) var slides = [MediaSlideshowSlide]()
 
     // MARK: - Preferences
 
@@ -173,7 +160,7 @@ open class MediaSlideshow: UIView {
     open var circular = true {
         didSet {
             if sources.count > 0 {
-                setMediaInputs(sources)
+                setMediaSources(sources)
             }
         }
     }
@@ -318,12 +305,10 @@ open class MediaSlideshow: UIView {
         }
         slides = []
 
-        if let dataSource = dataSource {
-            for source in scrollViewMedias {
-                let slide = dataSource.slideForSource(source, in: self)
-                slides.append(slide)
-                scrollView.addSubview(slide)
-            }
+        for source in scrollViewMedias {
+            let slide = source.slide(in: self)
+            slides.append(slide)
+            scrollView.addSubview(slide)
         }
 
         if circular && (scrollViewMedias.count > 1) {
@@ -358,20 +343,15 @@ open class MediaSlideshow: UIView {
         }
     }
 
-    // MARK: - Image setting
-
-    open func reloadData() {
-        let sources = dataSource?.sourcesInMediaSlideshow(self) ?? []
-        setMediaInputs(sources)
-    }
+    // MARK: - Media setting
 
     /**
      Set image inputs into the image slideshow
      - parameter inputs: Array of InputSource instances.
      */
-    private func setMediaInputs(_ inputs: [MediaSource]) {
-        sources = inputs
-        pageIndicator?.numberOfPages = inputs.count
+    public func setMediaSources(_ sources: [MediaSource]) {
+        self.sources = sources
+        pageIndicator?.numberOfPages = sources.count
 
         // in circular mode we add dummy first and last image to enable smooth scrolling
         if circular && sources.count > 1 {

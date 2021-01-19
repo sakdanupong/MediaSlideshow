@@ -34,7 +34,9 @@ open class FullScreenSlideshowViewController: UIViewController {
     open var initialPage: Int = 0
 
     /// Datasource
-    open var dataSource: MediaSlideshowDataSource?
+    open var sources: [MediaSource] {
+        slideshow.sources
+    }
 
     /// Background color
     open var backgroundColor = UIColor.black
@@ -63,9 +65,6 @@ open class FullScreenSlideshowViewController: UIViewController {
 
         view.backgroundColor = backgroundColor
         slideshow.backgroundColor = backgroundColor
-
-        slideshow.dataSource = dataSource
-        slideshow.reloadData()
 
         view.addSubview(slideshow)
 
@@ -112,6 +111,10 @@ open class FullScreenSlideshowViewController: UIViewController {
         }
 
         slideshow.frame = view.frame
+    }
+
+    public func setMediaSources(_ sources: [MediaSource]) {
+        slideshow.setMediaSources(sources)
     }
 
     func close() {

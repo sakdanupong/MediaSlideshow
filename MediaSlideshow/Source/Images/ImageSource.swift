@@ -9,7 +9,7 @@
 import UIKit
 
 /// A protocol that can be adapted by different Input Source providers
-@objc public protocol ImageSource: MediaSource {
+public protocol ImageSource: MediaSource {
     /**
      Load image from the source to image view.
      - parameter imageView: Image view to load the image into.
@@ -22,7 +22,19 @@ import UIKit
      Cancel image load on the image view
      - parameter imageView: Image view that is loading the image
     */
-    @objc optional func cancelLoad(on imageView: UIImageView)
+    func cancelLoad(on imageView: UIImageView)
+}
+
+extension ImageSource {
+    public func slide(in slideshow: MediaSlideshow) -> MediaSlideshowSlide {
+        let slide = ImageSlide(
+            image: self,
+            zoomEnabled: slideshow.zoomEnabled,
+            activityIndicator: slideshow.activityIndicator?.create(),
+            maximumScale: slideshow.maximumScale)
+        slide.imageView.contentMode = slideshow.contentScaleMode
+        return slide
+    }
 }
 
 /// Input Source to load plain UIImage
@@ -52,6 +64,8 @@ open class UIImageSource: NSObject, ImageSource {
         imageView.image = image
         callback(image)
     }
+
+    public func cancelLoad(on imageView: UIImageView) {}
 }
 
 /// Input Source to load an image from the main bundle
@@ -71,6 +85,8 @@ open class BundleImageSource: NSObject, ImageSource {
         imageView.image = image
         callback(image)
     }
+
+    public func cancelLoad(on imageView: UIImageView) {}
 }
 
 /// Input Source to load an image from a local file path
@@ -90,4 +106,6 @@ open class FileImageSource: NSObject, ImageSource {
         imageView.image = image
         callback(image)
     }
+
+    public func cancelLoad(on imageView: UIImageView) {}
 }

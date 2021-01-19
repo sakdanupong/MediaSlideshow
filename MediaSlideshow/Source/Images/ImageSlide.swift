@@ -139,7 +139,7 @@ open class ImageSlide: UIScrollView, UIScrollViewDelegate, ZoomableMediaSlidesho
     }
 
     public func cancelPendingLoad() {
-        image.cancelLoad?(on: imageView)
+        image.cancelLoad(on: imageView)
     }
 
     // MARK: - MediaSlideshowSlide
@@ -250,38 +250,5 @@ open class ImageSlide: UIScrollView, UIScrollViewDelegate, ZoomableMediaSlidesho
 
     open func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return zoomEnabled ? imageViewWrapper : nil
-    }
-
-}
-
-@objcMembers
-open class ImageMediaSlideshowDataSource: NSObject, MediaSlideshowDataSource {
-
-    open var sources: [ImageSource]
-
-    public init(sources: [ImageSource] = []) {
-        self.sources = sources
-        super.init()
-    }
-
-    public func sourcesInMediaSlideshow(_ mediaSlideshow: MediaSlideshow) -> [MediaSource] {
-        sources
-    }
-
-    public func slideForSource(_ source: MediaSource, in mediaSlideshow: MediaSlideshow) -> MediaSlideshowSlideView {
-        guard let image = source as? ImageSource else {
-            fatalError("Expected MediaSource to be an ImageSource")
-        }
-        let slide = ImageSlide(
-            image: image,
-            zoomEnabled: mediaSlideshow.zoomEnabled,
-            activityIndicator: mediaSlideshow.activityIndicator?.create(),
-            maximumScale: mediaSlideshow.maximumScale)
-        slide.imageView.contentMode = mediaSlideshow.contentScaleMode
-        return slide
-    }
-
-    public func dataSourceForFullscreen(_ fullscreenSlideshow: MediaSlideshow) -> MediaSlideshowDataSource {
-        self
     }
 }
