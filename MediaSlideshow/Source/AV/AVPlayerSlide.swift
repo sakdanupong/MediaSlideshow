@@ -54,20 +54,10 @@ public class AVPlayerSlide: AVPlayerView, MediaSlideshowSlide {
         playerTimeControlStatusObservation = source.player.observe(\.timeControlStatus) { [weak self] player, _ in
             self?.overlayView?.playerDidUpdateStatus(player.timeControlStatus)
         }
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(playerItemDidPlayToEndTime(notification:)),
-            name: .AVPlayerItemDidPlayToEndTime,
-            object: source.item)
     }
 
     required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-    @objc
-    private func playerItemDidPlayToEndTime(notification: Notification) {
-        source.player.seek(to: .zero)        
     }
     
     private func setPlayerViewVideoGravity() {
@@ -88,9 +78,7 @@ public class AVPlayerSlide: AVPlayerView, MediaSlideshowSlide {
 
     public func willBeRemoved() {}
 
-    public func loadMedia() {
-        _ = source.player
-    }
+    public func loadMedia() {}
 
     public func releaseMedia() {}
 

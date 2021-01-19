@@ -23,16 +23,26 @@ open class AVSource: NSObject, MediaSource {
         self.asset = asset
         self.onAppear = onAppear
         super.init()
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(playerItemDidPlayToEndTime(notification:)),
+            name: .AVPlayerItemDidPlayToEndTime,
+            object: item)
     }
 
     public convenience init(url: URL, onAppear: Playback) {
         self.init(asset: AVAsset(url: url), onAppear: onAppear)
     }
 
-    public func slide(in slideshow: MediaSlideshow) -> MediaSlideshowSlide {
+    open func slide(in slideshow: MediaSlideshow) -> MediaSlideshowSlide {
         AVPlayerSlide(
             source: self,
             overlayView: StandardAVSlideOverlayView(activityView: slideshow.activityIndicator?.create()),
             mediaContentMode: slideshow.contentScaleMode)
+    }
+
+    @objc
+    open func playerItemDidPlayToEndTime(notification: Notification) {
+        player.seek(to: .zero)
     }
 }
