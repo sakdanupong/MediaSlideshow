@@ -9,7 +9,7 @@ import AVFoundation
 import AVKit
 import UIKit
 
-public class MediaSlideshowAVSlide: AVPlayerView, MediaSlideshowSlide {
+public class AVPlayerSlide: AVPlayerView, MediaSlideshowSlide {
     public enum Playback {
         case play(muted: Bool)
         case paused

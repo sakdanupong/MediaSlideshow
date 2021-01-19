@@ -15,12 +15,12 @@ open class ImageAndVideoSlideshowDataSource: NSObject, MediaSlideshowDataSource 
     }
 
     open var sources: [Source]
-    open var onAVAppear: MediaSlideshowAVSlide.Playback
+    open var onAVAppear: AVPlayerSlide.Playback
     private lazy var fullscreen: MediaSlideshowDataSource = Self.init(
         sources: sources,
         onAVAppear: .play(muted: false))
 
-    public required init(sources: [Source], onAVAppear: MediaSlideshowAVSlide.Playback) {
+    public required init(sources: [Source], onAVAppear: AVPlayerSlide.Playback) {
         self.sources = sources
         self.onAVAppear = onAVAppear
         super.init()
@@ -46,7 +46,7 @@ open class ImageAndVideoSlideshowDataSource: NSObject, MediaSlideshowDataSource 
             return slide
         }
         if let av = source as? AVSource {
-            return MediaSlideshowAVSlide(
+            return AVPlayerSlide(
                 source: av,
                 onAppear: onAVAppear,
                 overlayView: StandardAVSlideOverlayView(activityView: mediaSlideshow.activityIndicator?.create()),
