@@ -10,24 +10,17 @@ import AVKit
 import UIKit
 
 public class AVPlayerSlide: AVPlayerView, MediaSlideshowSlide {
-    public enum Playback {
-        case play(muted: Bool)
-        case paused
-    }
     private let source: AVSource
     private var playerTimeControlStatusObservation: NSKeyValueObservation?
     private var playerTimeObserver: Any?
     private let overlayView: AVSlideOverlayView?
     private let transitionView: UIImageView
-    private let onAppear: Playback
 
     public init(
         source: AVSource,
-        onAppear: Playback = .paused,
         overlayView: AVSlideOverlayView? = nil,
         mediaContentMode: UIView.ContentMode) {
         self.source = source
-        self.onAppear = onAppear
         self.mediaContentMode = mediaContentMode
         self.overlayView = overlayView
         self.transitionView = UIImageView()
@@ -94,7 +87,7 @@ public class AVPlayerSlide: AVPlayerView, MediaSlideshowSlide {
     }
 
     public func didAppear() {
-        switch onAppear {
+        switch source.onAppear {
         case .play(let muted):
             source.player.play()
             source.player.isMuted = muted
