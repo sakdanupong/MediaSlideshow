@@ -190,8 +190,6 @@ open class ImageSlide: UIScrollView, UIScrollViewDelegate, ZoomableMediaSlidesho
         zoomOut()
     }
 
-    public func willStartFullscreenTransition(_ type: FullscreenTransitionType) {}
-
     // MARK: - Image zoom & size
 
     func tapZoom() {

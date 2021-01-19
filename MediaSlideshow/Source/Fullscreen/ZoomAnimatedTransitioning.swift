@@ -204,7 +204,6 @@ class ZoomInAnimator: ZoomAnimator, UIViewControllerAnimatedTransitioning {
         }
 
         toViewController.view.frame = transitionContext.finalFrame(for: toViewController)
-        toViewController.slideshow.currentSlide?.willStartFullscreenTransition(.zoomIn)
 
         let transitionBackgroundView = UIView(frame: containerView.frame)
         transitionBackgroundView.backgroundColor = toViewController.backgroundColor
@@ -295,7 +294,6 @@ class ZoomOutAnimator: ZoomAnimator, UIViewControllerAnimatedTransitioning {
         guard let fromViewController = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from) as? FullScreenSlideshowViewController else {
             fatalError("Transition not used with FullScreenSlideshowViewController")
         }
-        fromViewController.slideshow.currentSlide?.willStartFullscreenTransition(.zoomOut)
 
         let containerView = transitionContext.containerView
         var transitionImageView: UIImageView?

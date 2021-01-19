@@ -22,6 +22,4 @@ public protocol MediaSlideshowSlide: UIView {
     func didAppear()
 
     func didDisappear()
-
-    func willStartFullscreenTransition(_ type: FullscreenTransitionType)
 }

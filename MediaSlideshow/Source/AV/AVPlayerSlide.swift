@@ -93,10 +93,6 @@ public class AVPlayerSlide: AVPlayerView, MediaSlideshowSlide {
         return transitionView
     }
 
-    public func willStartFullscreenTransition(_ type: FullscreenTransitionType) {
-        source.player.pause()
-    }
-
     public func didAppear() {
         switch onAppear {
         case .play(let muted):
