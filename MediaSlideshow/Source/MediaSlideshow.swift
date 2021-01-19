@@ -215,7 +215,7 @@ open class MediaSlideshow: UIView {
     fileprivate var isAnimating: Bool = false
 
     /// Transitioning delegate to manage the transition to full screen controller
-    open fileprivate(set) var slideshowTransitioningDelegate: ZoomAnimatedTransitioningDelegate? // swiftlint:disable:this weak_delegate
+    open internal(set) var slideshowTransitioningDelegate: ZoomAnimatedTransitioningDelegate? // swiftlint:disable:this weak_delegate
 
     private var primaryVisiblePage: Int {
         return scrollView.frame.size.width > 0 ? Int(scrollView.contentOffset.x + scrollView.frame.size.width / 2) / Int(scrollView.frame.size.width) : 0
@@ -311,7 +311,7 @@ open class MediaSlideshow: UIView {
     }
 
     /// reloads scroll view with latest slideshow items
-    func reloadScrollView() {
+    private func reloadScrollView() {
         // remove previous slideshow items
         for view in slides {
             view.removeFromSuperview()
@@ -333,13 +333,13 @@ open class MediaSlideshow: UIView {
             scrollViewPage = 0
         }
 
-        loadImages(for: scrollViewPage)
+        loadMedia(for: scrollViewPage)
         if slides.count > scrollViewPage {
             slides[scrollViewPage].didAppear(in: self)
         }
     }
 
-    private func loadImages(for scrollViewPage: Int) {
+    private func loadMedia(for scrollViewPage: Int) {
         let totalCount = slides.count
 
         for i in 0..<totalCount {
@@ -437,7 +437,7 @@ open class MediaSlideshow: UIView {
         }
 
         if page != scrollViewPage {
-            loadImages(for: page)
+            loadMedia(for: page)
         }
         scrollViewPage = page
         currentPage = currentPageForScrollViewPage(page)
@@ -488,28 +488,6 @@ open class MediaSlideshow: UIView {
 
         let newPage = scrollViewPage > 0 ? scrollViewPage - 1 : scrollViewMedias.count - 3
         setScrollViewPage(newPage, animated: animated)
-    }
-
-    /**
-     Open full screen slideshow
-     - parameter controller: Controller to present the full screen controller from
-     - returns: FullScreenSlideshowViewController instance
-     */
-    @discardableResult
-    open func presentFullScreenController(from controller: UIViewController, completion: (() -> Void)? = nil) -> FullScreenSlideshowViewController {
-        let fullscreen = FullScreenSlideshowViewController()
-        fullscreen.pageSelected = {[weak self] (page: Int) in
-            self?.setCurrentPage(page, animated: false)
-        }
-
-        fullscreen.initialPage = currentPage
-        fullscreen.dataSource = dataSource?.dataSourceForFullscreen(fullscreen.slideshow)
-        slideshowTransitioningDelegate = ZoomAnimatedTransitioningDelegate(slideshowView: self, slideshowController: fullscreen)
-        fullscreen.transitioningDelegate = slideshowTransitioningDelegate
-        fullscreen.modalPresentationStyle = .custom
-        controller.present(fullscreen, animated: true, completion: completion)
-
-        return fullscreen
     }
 
     @objc private func pageControlValueChanged() {

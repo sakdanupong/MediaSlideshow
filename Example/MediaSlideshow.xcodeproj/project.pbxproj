@@ -24,7 +24,7 @@
 		D0BD3E9225B0DA8A00936AC7 /* AVSlideOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0BD3E9125B0DA8A00936AC7 /* AVSlideOverlayView.swift */; };
 		D0D1783225AE623200D1CC41 /* PageIndicatorPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D1782325AE623200D1CC41 /* PageIndicatorPosition.swift */; };
 		D0D1783325AE623200D1CC41 /* ZoomAnimatedTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D1782425AE623200D1CC41 /* ZoomAnimatedTransitioning.swift */; };
-		D0D1783425AE623200D1CC41 /* MediaSlideshowImageSlide.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D1782525AE623200D1CC41 /* MediaSlideshowImageSlide.swift */; };
+		D0D1783425AE623200D1CC41 /* ImageSlide.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D1782525AE623200D1CC41 /* ImageSlide.swift */; };
 		D0D1783525AE623200D1CC41 /* MediaSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D1782625AE623200D1CC41 /* MediaSource.swift */; };
 		D0D1783625AE623200D1CC41 /* MediaSlideshow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D1782725AE623200D1CC41 /* MediaSlideshow.swift */; };
 		D0D1783725AE623200D1CC41 /* ZoomableMediaSlideshowSlide.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D1782825AE623200D1CC41 /* ZoomableMediaSlideshowSlide.swift */; };
@@ -37,6 +37,7 @@
 		D0D1783E25AE623200D1CC41 /* ImageSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D1782F25AE623200D1CC41 /* ImageSource.swift */; };
 		D0D1783F25AE623200D1CC41 /* SwiftSupport.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D1783025AE623200D1CC41 /* SwiftSupport.swift */; };
 		D0D1784025AE623200D1CC41 /* UIImage+AspectFit.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0D1783125AE623200D1CC41 /* UIImage+AspectFit.swift */; };
+		D0ED1F0725B77E5800EF46F5 /* MediaSlideshow+Fullscreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = D0ED1F0625B77E5800EF46F5 /* MediaSlideshow+Fullscreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,7 +78,7 @@
 		D0BD3E9125B0DA8A00936AC7 /* AVSlideOverlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AVSlideOverlayView.swift; sourceTree = "<group>"; };
 		D0D1782325AE623200D1CC41 /* PageIndicatorPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageIndicatorPosition.swift; sourceTree = "<group>"; };
 		D0D1782425AE623200D1CC41 /* ZoomAnimatedTransitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomAnimatedTransitioning.swift; sourceTree = "<group>"; };
-		D0D1782525AE623200D1CC41 /* MediaSlideshowImageSlide.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaSlideshowImageSlide.swift; sourceTree = "<group>"; };
+		D0D1782525AE623200D1CC41 /* ImageSlide.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageSlide.swift; sourceTree = "<group>"; };
 		D0D1782625AE623200D1CC41 /* MediaSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaSource.swift; sourceTree = "<group>"; };
 		D0D1782725AE623200D1CC41 /* MediaSlideshow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MediaSlideshow.swift; sourceTree = "<group>"; };
 		D0D1782825AE623200D1CC41 /* ZoomableMediaSlideshowSlide.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZoomableMediaSlideshowSlide.swift; sourceTree = "<group>"; };
@@ -91,6 +92,7 @@
 		D0D1783025AE623200D1CC41 /* SwiftSupport.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftSupport.swift; sourceTree = "<group>"; };
 		D0D1783125AE623200D1CC41 /* UIImage+AspectFit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+AspectFit.swift"; sourceTree = "<group>"; };
 		D0E8A9E21D97EB6D007EC517 /* MediaSlideshow.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = MediaSlideshow.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D0ED1F0625B77E5800EF46F5 /* MediaSlideshow+Fullscreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MediaSlideshow+Fullscreen.swift"; sourceTree = "<group>"; };
 		FD45C56C18E7B8EC08371B86 /* Pods-ImageSlideshow_Example.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ImageSlideshow_Example.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ImageSlideshow_Example/Pods-ImageSlideshow_Example.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -229,25 +231,42 @@
 		D0E8A9E31D97EB6D007EC517 /* MediaSlideshow_framework */ = {
 			isa = PBXGroup;
 			children = (
+				D0ED1F0525B77DDB00EF46F5 /* Fullscreen */,
+				D0ED1F0425B77D8A00EF46F5 /* Images */,
 				D0B653C625B02E35009B7B8E /* AV */,
 				D0D1782B25AE623200D1CC41 /* ActivityIndicator.swift */,
 				D0D1782925AE623200D1CC41 /* Bundle+Module.swift */,
-				D0D1782C25AE623200D1CC41 /* FullScreenSlideshowViewController.swift */,
-				D0D1782F25AE623200D1CC41 /* ImageSource.swift */,
 				D0D1782725AE623200D1CC41 /* MediaSlideshow.swift */,
-				D0D1782525AE623200D1CC41 /* MediaSlideshowImageSlide.swift */,
 				D0D1782D25AE623200D1CC41 /* MediaSlideshowSlide.swift */,
 				D0D1782625AE623200D1CC41 /* MediaSource.swift */,
 				D0D1782A25AE623200D1CC41 /* PageIndicator.swift */,
 				D0D1782325AE623200D1CC41 /* PageIndicatorPosition.swift */,
 				D0D1783025AE623200D1CC41 /* SwiftSupport.swift */,
-				D0D1783125AE623200D1CC41 /* UIImage+AspectFit.swift */,
-				D0D1782E25AE623200D1CC41 /* UIImageView+Tools.swift */,
 				D0D1782825AE623200D1CC41 /* ZoomableMediaSlideshowSlide.swift */,
-				D0D1782425AE623200D1CC41 /* ZoomAnimatedTransitioning.swift */,
 			);
 			name = MediaSlideshow_framework;
 			path = ../MediaSlideshow/Source;
+			sourceTree = "<group>";
+		};
+		D0ED1F0425B77D8A00EF46F5 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				D0D1782F25AE623200D1CC41 /* ImageSource.swift */,
+				D0D1782525AE623200D1CC41 /* ImageSlide.swift */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		D0ED1F0525B77DDB00EF46F5 /* Fullscreen */ = {
+			isa = PBXGroup;
+			children = (
+				D0D1782C25AE623200D1CC41 /* FullScreenSlideshowViewController.swift */,
+				D0ED1F0625B77E5800EF46F5 /* MediaSlideshow+Fullscreen.swift */,
+				D0D1783125AE623200D1CC41 /* UIImage+AspectFit.swift */,
+				D0D1782E25AE623200D1CC41 /* UIImageView+Tools.swift */,
+				D0D1782425AE623200D1CC41 /* ZoomAnimatedTransitioning.swift */,
+			);
+			path = Fullscreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -477,6 +496,7 @@
 				D0B653C025B02D55009B7B8E /* AVPlayerSlide.swift in Sources */,
 				D0BD3E9225B0DA8A00936AC7 /* AVSlideOverlayView.swift in Sources */,
 				D0D1783F25AE623200D1CC41 /* SwiftSupport.swift in Sources */,
+				D0ED1F0725B77E5800EF46F5 /* MediaSlideshow+Fullscreen.swift in Sources */,
 				D0D1783725AE623200D1CC41 /* ZoomableMediaSlideshowSlide.swift in Sources */,
 				D0D1783825AE623200D1CC41 /* Bundle+Module.swift in Sources */,
 				D0D1783625AE623200D1CC41 /* MediaSlideshow.swift in Sources */,
@@ -487,7 +507,7 @@
 				D0B653C125B02D55009B7B8E /* UIView+Embed.swift in Sources */,
 				D0D1784025AE623200D1CC41 /* UIImage+AspectFit.swift in Sources */,
 				D0D1783C25AE623200D1CC41 /* MediaSlideshowSlide.swift in Sources */,
-				D0D1783425AE623200D1CC41 /* MediaSlideshowImageSlide.swift in Sources */,
+				D0D1783425AE623200D1CC41 /* ImageSlide.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

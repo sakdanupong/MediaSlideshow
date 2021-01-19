@@ -37,7 +37,7 @@ open class ImageAndVideoSlideshowDataSource: NSObject, MediaSlideshowDataSource 
 
     public func slideForSource(_ source: MediaSource, in mediaSlideshow: MediaSlideshow) -> MediaSlideshowSlideView {
         if let image = source as? ImageSource {
-            let slide = MediaSlideshowImageSlide(
+            let slide = ImageSlide(
                 image: image,
                 zoomEnabled: mediaSlideshow.zoomEnabled,
                 activityIndicator: mediaSlideshow.activityIndicator?.create(),

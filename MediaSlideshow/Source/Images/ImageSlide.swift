@@ -9,7 +9,7 @@ import UIKit
 
 /// Used to wrap a single slideshow item and allow zooming on it
 @objcMembers
-open class MediaSlideshowImageSlide: UIScrollView, UIScrollViewDelegate, ZoomableMediaSlideshowSlide {
+open class ImageSlide: UIScrollView, UIScrollViewDelegate, ZoomableMediaSlideshowSlide {
 
     /// Image view to hold the image
     public let imageView = UIImageView()
@@ -54,7 +54,7 @@ open class MediaSlideshowImageSlide: UIScrollView, UIScrollViewDelegate, Zoomabl
     // MARK: - Life cycle
 
     /**
-        Initializes a new MediaSlideshowImageSlide
+        Initializes a new ImageSlide
         - parameter image: Input Source to load the image
         - parameter zoomEnabled: holds if it should be possible to zoom-in the image
     */
@@ -95,7 +95,7 @@ open class MediaSlideshowImageSlide: UIScrollView, UIScrollViewDelegate, Zoomabl
         }
 
         // tap gesture recognizer
-        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(MediaSlideshowImageSlide.tapZoom))
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(ImageSlide.tapZoom))
         tapRecognizer.numberOfTapsRequired = 2
         imageViewWrapper.addGestureRecognizer(tapRecognizer)
         gestureRecognizer = tapRecognizer
@@ -272,7 +272,7 @@ open class ImageMediaSlideshowDataSource: NSObject, MediaSlideshowDataSource {
         guard let image = source as? ImageSource else {
             fatalError("Expected MediaSource to be an ImageSource")
         }
-        let slide = MediaSlideshowImageSlide(
+        let slide = ImageSlide(
             image: image,
             zoomEnabled: mediaSlideshow.zoomEnabled,
             activityIndicator: mediaSlideshow.activityIndicator?.create(),
