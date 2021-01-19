@@ -199,15 +199,6 @@ open class MediaSlideshow: UIView {
         }
     }
 
-    /// Image change interval, zero stops the auto-scrolling
-    open var slideshowInterval = 0.0 {
-        didSet {
-            slideshowTimer?.invalidate()
-            slideshowTimer = nil
-            setTimerIfNeeded()
-        }
-    }
-
     /// Image preload configuration, can be sed to .fixed to enable lazy load or .all
     open var preload = ImagePreload.all
 
@@ -220,7 +211,6 @@ open class MediaSlideshow: UIView {
         }
     }
 
-    fileprivate var slideshowTimer: Timer?
     fileprivate var scrollViewMedias = [MediaSource]()
     fileprivate var isAnimating: Bool = false
 
@@ -275,13 +265,7 @@ open class MediaSlideshow: UIView {
             pageIndicator = UIPageControl()
         }
 
-        setTimerIfNeeded()
         layoutScrollView()
-    }
-
-    open override func removeFromSuperview() {
-        super.removeFromSuperview()
-        pauseTimer()
     }
 
     open override func layoutSubviews() {
@@ -406,7 +390,6 @@ open class MediaSlideshow: UIView {
             scrollViewMedias = sources
         }
 
-        setTimerIfNeeded()
         reloadScrollView()
         layoutScrollView()
         layoutPageControl()
@@ -443,23 +426,6 @@ open class MediaSlideshow: UIView {
         }
     }
 
-    fileprivate func setTimerIfNeeded() {
-        if slideshowInterval > 0 && scrollViewMedias.count > 1 && slideshowTimer == nil {
-            slideshowTimer = Timer.scheduledTimer(timeInterval: slideshowInterval, target: self, selector: #selector(MediaSlideshow.slideshowTick(_:)), userInfo: nil, repeats: true)
-        }
-    }
-
-    func slideshowTick(_ timer: Timer) {
-        let page = scrollView.frame.size.width > 0 ? Int(scrollView.contentOffset.x / scrollView.frame.size.width) : 0
-        var nextPage = page + 1
-
-        if !circular && page == scrollViewMedias.count - 1 {
-            nextPage = 0
-        }
-
-        setScrollViewPage(nextPage, animated: true)
-    }
-
     fileprivate func setCurrentPageForScrollViewPage(_ page: Int) {
         if scrollViewPage != page {
             if slides.count > scrollViewPage {
@@ -493,36 +459,6 @@ open class MediaSlideshow: UIView {
         }
     }
 
-    fileprivate func restartTimer() {
-        if slideshowTimer?.isValid != nil {
-            slideshowTimer?.invalidate()
-            slideshowTimer = nil
-        }
-
-        setTimerIfNeeded()
-    }
-
-    /// Stops slideshow timer
-    open func pauseTimer() {
-        slideshowTimer?.invalidate()
-        slideshowTimer = nil
-    }
-
-    /// Restarts slideshow timer
-    open func unpauseTimer() {
-        setTimerIfNeeded()
-    }
-
-    @available(*, deprecated, message: "use pauseTimer instead")
-    open func pauseTimerIfNeeded() {
-        pauseTimer()
-    }
-
-    @available(*, deprecated, message: "use unpauseTimer instead")
-    open func unpauseTimerIfNeeded() {
-        unpauseTimer()
-    }
-
     /**
      Change the page to the next one
      - Parameter animated: true if animate the change
@@ -536,7 +472,6 @@ open class MediaSlideshow: UIView {
         }
 
         setCurrentPage(currentPage + 1, animated: animated)
-        restartTimer()
     }
 
     /**
@@ -553,7 +488,6 @@ open class MediaSlideshow: UIView {
 
         let newPage = scrollViewPage > 0 ? scrollViewPage - 1 : scrollViewMedias.count - 3
         setScrollViewPage(newPage, animated: animated)
-        restartTimer()
     }
 
     /**
@@ -588,7 +522,6 @@ open class MediaSlideshow: UIView {
 extension MediaSlideshow: UIScrollViewDelegate {
 
     open func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        restartTimer()
         willBeginDragging?()
         delegate?.mediaSlideshowWillBeginDragging?(self)
     }

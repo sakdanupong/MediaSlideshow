@@ -184,9 +184,7 @@ open class MediaSlideshowImageSlide: UIScrollView, UIScrollViewDelegate, Zoomabl
         self.loadMedia()
     }
 
-    public func didAppear(in slideshow: MediaSlideshow) {
-        slideshow.unpauseTimer()
-    }
+    public func didAppear(in slideshow: MediaSlideshow) {}
 
     public func didDisappear(in slideshow: MediaSlideshow) {
         zoomOut()

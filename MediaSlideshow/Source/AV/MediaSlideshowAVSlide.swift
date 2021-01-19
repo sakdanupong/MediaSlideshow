@@ -110,7 +110,6 @@ public class MediaSlideshowAVSlide: AVPlayerView, MediaSlideshowSlide {
     }
 
     public func didAppear(in slideshow: MediaSlideshow) {
-        slideshow.pauseTimer()
         switch onAppear {
         case .play(let muted):
             source.player.play()
@@ -121,7 +120,6 @@ public class MediaSlideshowAVSlide: AVPlayerView, MediaSlideshowSlide {
     }
 
     public func didDisappear(in slideshow: MediaSlideshow) {
-        slideshow.unpauseTimer()
         source.player.pause()
     }
 }
