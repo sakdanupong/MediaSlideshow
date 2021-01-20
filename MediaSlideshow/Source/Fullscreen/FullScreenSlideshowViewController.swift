@@ -52,7 +52,7 @@ open class FullScreenSlideshowViewController: UIViewController {
 
     convenience init() {
         self.init(nibName: nil, bundle: nil)
-
+        slideshow.delegate = self
         self.modalPresentationStyle = .custom
         if #available(iOS 13.0, *) {
             // Use KVC to set the value to preserve backwards compatiblity with Xcode < 11
@@ -124,5 +124,14 @@ open class FullScreenSlideshowViewController: UIViewController {
         }
 
         dismiss(animated: true, completion: nil)
+    }
+}
+extension FullScreenSlideshowViewController: MediaSlideshowDelegate {
+    public func mediaSlideshow(_ mediaSlideshow: MediaSlideshow, didChangeCurrentPageTo page: Int) {
+        let isAVSource = sources[page] is AVSource
+        UIView.animate(withDuration: 0.3) {
+            self.slideshow.pageIndicator?.view.alpha = isAVSource ? 0.0 : 1.0
+            self.closeButton.alpha = isAVSource ? 0.0 : 1.0
+        }
     }
 }
