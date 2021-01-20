@@ -71,6 +71,9 @@ open class AVSource: NSObject, MediaSource {
 }
 
 extension AVSource: AVPlayerSlideDelegate {
+    public func slideDidSingleTap(_ slide: AVPlayerSlide) {
+    }
+
     open func slideDidAppear(_ slide: AVPlayerSlide) {
         switch onAppear {
         case .play(let muted):
