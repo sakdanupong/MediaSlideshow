@@ -13,13 +13,12 @@ public protocol AVPlayerSlideDelegate: AnyObject {
     func currentThumbnail(_ slide: AVPlayerSlide) -> UIImage?
     func slideDidAppear(_ slide: AVPlayerSlide)
     func slideDidDisappear(_ slide: AVPlayerSlide)
-    func slideDidSingleTap(_ slide: AVPlayerSlide)
 }
 
 public class AVPlayerSlide: UIView, MediaSlideshowSlide {
     weak var delegate: AVPlayerSlideDelegate?
 
-    private let playerController: AVPlayerViewController
+    public let playerController: AVPlayerViewController
     private let transitionView: UIImageView
 
     public init(
@@ -34,7 +33,9 @@ public class AVPlayerSlide: UIView, MediaSlideshowSlide {
         transitionView.isHidden = true
         embed(transitionView)
         embed(playerController.view)
-        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSingleTap)))
+        if playerController.showsPlaybackControls {
+            addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didSingleTap)))
+        }
     }
 
     required public init?(coder aDecoder: NSCoder) {
@@ -57,7 +58,9 @@ public class AVPlayerSlide: UIView, MediaSlideshowSlide {
         }
     }
 
-    public func willBeRemoved() {}
+    public func willBeRemoved() {
+        playerController.player?.pause()
+    }
 
     public func loadMedia() {}
 
@@ -79,7 +82,5 @@ public class AVPlayerSlide: UIView, MediaSlideshowSlide {
     }
 
     @objc
-    private func didSingleTap() {
-        delegate?.slideDidSingleTap(self)
-    }
+    private func didSingleTap() {}
 }

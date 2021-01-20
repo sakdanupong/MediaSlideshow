@@ -301,8 +301,9 @@ open class MediaSlideshow: UIView {
         }
         scrollViewPage = 0
         loadMedia(for: scrollViewPage)
-        if slides.count > scrollViewPage {
-            slides[scrollViewPage].didAppear()
+        if !slides.isEmpty {
+            delegate?.mediaSlideshow?(self, didChangeCurrentPageTo: 0)
+            slides[0].didAppear()
         }
     }
 
