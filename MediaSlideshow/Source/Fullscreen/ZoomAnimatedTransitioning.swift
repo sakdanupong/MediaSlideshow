@@ -253,12 +253,6 @@ class ZoomInAnimator: ZoomAnimator, UIViewControllerAnimatedTransitioning {
             transitionView?.removeFromSuperview()
             transitionBackgroundView.removeFromSuperview()
             containerView.addSubview(toViewController.view)
-            if completed {
-                if let fromSlideshow = self.referenceSlideshowView {
-                    fromSlideshow.currentSlide?.didDisappear()
-                }
-                toViewController.slideshow.currentSlide?.didAppear()
-            }
             transitionContext.completeTransition(completed)
         })
     }
@@ -360,11 +354,6 @@ class ZoomOutAnimator: ZoomAnimator, UIViewControllerAnimatedTransitioning {
             if completed {
                 fromViewController.view.removeFromSuperview()
                 UIApplication.shared.keyWindow?.removeGestureRecognizer(self.parent.gestureRecognizer)
-
-                fromViewController.slideshow.currentSlide?.didDisappear()
-                if let toSlideshow = self.referenceSlideshowView {
-                    toSlideshow.currentSlide?.didAppear()
-                }
             } else {
                 fromViewController.view.isHidden = false
             }
