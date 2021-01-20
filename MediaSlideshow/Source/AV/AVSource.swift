@@ -37,8 +37,24 @@ open class AVSource: NSObject, MediaSource {
     open func slide(in slideshow: MediaSlideshow) -> MediaSlideshowSlide {
         let playerController = AVPlayerViewController()
         playerController.player = player
-        playerController.showsPlaybackControls = false
-        playerController.contentOverlayView?.embed(StandardAVSlideOverlayView(source: self, activityView: slideshow.activityIndicator?.create()))
+        switch onAppear {
+        case .paused:
+            playerController.showsPlaybackControls = true
+            let overlay = StandardAVSlideOverlayView(
+                source: self,
+                playView: nil,
+                pauseView: nil,
+                activityView: slideshow.activityIndicator?.create())
+            playerController.contentOverlayView?.embed(overlay)
+        case .play:
+            playerController.showsPlaybackControls = false
+            let overlay = StandardAVSlideOverlayView(
+                source: self,
+                playView: AVSlidePlayingOverlayView(),
+                pauseView: AVSlidePausedOverlayView(),
+                activityView: slideshow.activityIndicator?.create())
+            playerController.contentOverlayView?.embed(overlay)
+        }
         let slide = AVPlayerSlide(
             playerController: playerController,
             mediaContentMode: slideshow.contentScaleMode)
