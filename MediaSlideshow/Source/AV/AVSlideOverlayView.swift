@@ -20,17 +20,16 @@ open class StandardAVSlideOverlayView: UIView, AVSlideOverlayView {
     private let playView: AVSlideOverlayView?
     private let pauseView: AVSlideOverlayView?
     private let activityView: ActivityIndicatorView?
-    private let source: AVSource
     private var playerTimeControlStatusObservation: NSKeyValueObservation?
     private var playerTimeObserver: Any?
 
     public init(
-        source: AVSource,
+        item: AVPlayerItem,
+        player: AVPlayer,
         playView: AVSlideOverlayView? = AVSlidePlayingOverlayView(),
         pauseView: AVSlideOverlayView? = AVSlidePausedOverlayView(),
         activityView: ActivityIndicatorView? = nil
     ) {
-        self.source = source
         self.playView = playView
         self.pauseView = pauseView
         self.activityView = activityView
@@ -46,17 +45,17 @@ open class StandardAVSlideOverlayView: UIView, AVSlideOverlayView {
         }
         playerDidUpdateStatus(.paused)
         let interval = CMTime(seconds: 0.5, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
-        playerTimeObserver = source.player.addPeriodicTimeObserver(
+        playerTimeObserver = player.addPeriodicTimeObserver(
             forInterval: interval,
-            queue: .main) { [weak self] time in
-            guard let self = self else { return }
-            let currentTime = self.source.item.currentTime().seconds
-            let duration = self.source.item.duration.seconds
+            queue: .main) { [weak item, weak self] time in
+            guard let self = self, let item = item else { return }
+            let currentTime = item.currentTime().seconds
+            let duration = item.duration.seconds
             self.playerDidUpdateToTime(
                 currentTime,
                 duration: (duration.isNaN || duration.isInfinite) ? nil : duration)
         }
-        playerTimeControlStatusObservation = source.player.observe(\.timeControlStatus) { [weak self] player, _ in
+        playerTimeControlStatusObservation = player.observe(\.timeControlStatus) { [weak self] player, _ in
             self?.playerDidUpdateStatus(player.timeControlStatus)
         }
     }

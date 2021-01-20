@@ -41,7 +41,8 @@ open class AVSource: NSObject, MediaSource {
         case .paused:
             playerController.showsPlaybackControls = true
             let overlay = StandardAVSlideOverlayView(
-                source: self,
+                item: item,
+                player: player,
                 playView: nil,
                 pauseView: nil,
                 activityView: slideshow.activityIndicator?.create())
@@ -49,7 +50,8 @@ open class AVSource: NSObject, MediaSource {
         case .play:
             playerController.showsPlaybackControls = false
             let overlay = StandardAVSlideOverlayView(
-                source: self,
+                item: item,
+                player: player,
                 playView: AVSlidePlayingOverlayView(),
                 pauseView: AVSlidePausedOverlayView(),
                 activityView: slideshow.activityIndicator?.create())
