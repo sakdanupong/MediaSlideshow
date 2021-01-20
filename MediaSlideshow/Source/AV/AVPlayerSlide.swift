@@ -15,31 +15,24 @@ public protocol AVPlayerSlideDelegate: AnyObject {
     func slideDidDisappear(_ slide: AVPlayerSlide)
 }
 
-public class AVPlayerSlide: AVPlayerView, MediaSlideshowSlide {
+public class AVPlayerSlide: UIView, MediaSlideshowSlide {
     weak var delegate: AVPlayerSlideDelegate?
 
-    private let source: AVSource
-    private let overlayView: AVSlideOverlayView?
+    private let playerController: AVPlayerViewController
     private let transitionView: UIImageView
 
     public init(
-        source: AVSource,
-        overlayView: AVSlideOverlayView? = nil,
+        playerController: AVPlayerViewController,
         mediaContentMode: UIView.ContentMode) {
-        self.source = source
+        self.playerController = playerController
         self.mediaContentMode = mediaContentMode
-        self.overlayView = overlayView
         self.transitionView = UIImageView()
         super.init(frame: .zero)
-        player = source.player
         setPlayerViewVideoGravity()
         // Stays hidden, but needs to be apart of the view heirarchy due to how the zoom animation works.
         transitionView.isHidden = true
         embed(transitionView)
-        if let overlayView = overlayView {
-            embed(overlayView)
-        }
-
+        embed(playerController.view)
     }
 
     required public init?(coder aDecoder: NSCoder) {
@@ -48,9 +41,9 @@ public class AVPlayerSlide: AVPlayerView, MediaSlideshowSlide {
     
     private func setPlayerViewVideoGravity() {
         switch mediaContentMode {
-        case .scaleAspectFill: videoGravity = .resizeAspectFill
-        case .scaleToFill: videoGravity = .resize
-        default: videoGravity = .resizeAspect
+        case .scaleAspectFill: playerController.videoGravity = .resizeAspectFill
+        case .scaleToFill: playerController.videoGravity = .resize
+        default: playerController.videoGravity = .resizeAspect
         }
     }
 
@@ -69,7 +62,7 @@ public class AVPlayerSlide: AVPlayerView, MediaSlideshowSlide {
     public func releaseMedia() {}
 
     public func transitionImageView() -> UIImageView {
-        transitionView.frame = videoRect
+        transitionView.frame = playerController.videoBounds
         transitionView.contentMode = mediaContentMode
         transitionView.image = delegate?.currentThumbnail(self)
         return transitionView

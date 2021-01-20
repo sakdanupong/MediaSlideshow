@@ -6,6 +6,7 @@
 //
 
 import AVFoundation
+import AVKit
 import Foundation
 
 open class AVSource: NSObject, MediaSource {
@@ -34,9 +35,12 @@ open class AVSource: NSObject, MediaSource {
     }
 
     open func slide(in slideshow: MediaSlideshow) -> MediaSlideshowSlide {
+        let playerController = AVPlayerViewController()
+        playerController.player = player
+        playerController.showsPlaybackControls = false
+        playerController.contentOverlayView?.embed(StandardAVSlideOverlayView(source: self, activityView: slideshow.activityIndicator?.create()))
         let slide = AVPlayerSlide(
-            source: self,
-            overlayView: StandardAVSlideOverlayView(activityView: slideshow.activityIndicator?.create()),
+            playerController: playerController,
             mediaContentMode: slideshow.contentScaleMode)
         slide.delegate = self
         return slide
