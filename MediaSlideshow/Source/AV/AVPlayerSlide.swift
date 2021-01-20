@@ -9,10 +9,16 @@ import AVFoundation
 import AVKit
 import UIKit
 
+public protocol AVPlayerSlideDelegate: AnyObject {
+    func currentThumbnail(_ slide: AVPlayerSlide) -> UIImage?
+    func slideDidAppear(_ slide: AVPlayerSlide)
+    func slideDidDisappear(_ slide: AVPlayerSlide)
+}
+
 public class AVPlayerSlide: AVPlayerView, MediaSlideshowSlide {
+    weak var delegate: AVPlayerSlideDelegate?
+
     private let source: AVSource
-    private var playerTimeControlStatusObservation: NSKeyValueObservation?
-    private var playerTimeObserver: Any?
     private let overlayView: AVSlideOverlayView?
     private let transitionView: UIImageView
 
@@ -33,20 +39,7 @@ public class AVPlayerSlide: AVPlayerView, MediaSlideshowSlide {
         if let overlayView = overlayView {
             embed(overlayView)
         }
-        let interval = CMTime(seconds: 0.5, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
-        playerTimeObserver = source.player.addPeriodicTimeObserver(
-            forInterval: interval,
-            queue: .main) { [weak self] time in
-            guard let self = self else { return }
-            let currentTime = self.source.item.currentTime().seconds
-            let duration = self.source.item.duration.seconds
-            self.overlayView?.playerDidUpdateToTime(
-                currentTime,
-                duration: (duration.isNaN || duration.isInfinite) ? nil : duration)
-        }
-        playerTimeControlStatusObservation = source.player.observe(\.timeControlStatus) { [weak self] player, _ in
-            self?.overlayView?.playerDidUpdateStatus(player.timeControlStatus)
-        }
+
     }
 
     required public init?(coder aDecoder: NSCoder) {
@@ -78,25 +71,15 @@ public class AVPlayerSlide: AVPlayerView, MediaSlideshowSlide {
     public func transitionImageView() -> UIImageView {
         transitionView.frame = videoRect
         transitionView.contentMode = mediaContentMode
-        let generator = AVAssetImageGenerator(asset: source.asset)
-        generator.appliesPreferredTrackTransform = true
-        if let imageRef = try? generator.copyCGImage(at: source.player.currentTime(), actualTime: nil) {
-            transitionView.image = UIImage(cgImage: imageRef)
-        }
+        transitionView.image = delegate?.currentThumbnail(self)
         return transitionView
     }
 
     public func didAppear() {
-        switch source.onAppear {
-        case .play(let muted):
-            source.player.play()
-            source.player.isMuted = muted
-        case .paused:
-            source.player.pause()
-        }
+        delegate?.slideDidAppear(self)
     }
 
     public func didDisappear() {
-        source.player.pause()
+        delegate?.slideDidDisappear(self)
     }
 }

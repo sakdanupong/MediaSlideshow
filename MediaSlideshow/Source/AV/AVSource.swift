@@ -8,14 +8,13 @@
 import AVFoundation
 import Foundation
 
-@objcMembers
 open class AVSource: NSObject, MediaSource {
     public enum Playback {
         case play(muted: Bool)
         case paused
     }
-    public let onAppear: Playback
-    public let asset: AVAsset
+    private let onAppear: Playback
+    private let asset: AVAsset
     public private(set) lazy var item = AVPlayerItem(asset: asset)
     public private(set) lazy var player = AVPlayer(playerItem: item)
 
@@ -35,14 +34,41 @@ open class AVSource: NSObject, MediaSource {
     }
 
     open func slide(in slideshow: MediaSlideshow) -> MediaSlideshowSlide {
-        AVPlayerSlide(
+        let slide = AVPlayerSlide(
             source: self,
             overlayView: StandardAVSlideOverlayView(activityView: slideshow.activityIndicator?.create()),
             mediaContentMode: slideshow.contentScaleMode)
+        slide.delegate = self
+        return slide
     }
 
     @objc
     open func playerItemDidPlayToEndTime(notification: Notification) {
         player.seek(to: .zero)
+    }
+}
+
+extension AVSource: AVPlayerSlideDelegate {
+    open func slideDidAppear(_ slide: AVPlayerSlide) {
+        switch onAppear {
+        case .play(let muted):
+            player.play()
+            player.isMuted = muted
+        case .paused:
+            player.pause()
+        }
+    }
+
+    open func slideDidDisappear(_ slide: AVPlayerSlide) {
+        player.pause()
+    }
+
+    open func currentThumbnail(_ slide: AVPlayerSlide) -> UIImage? {
+        let generator = AVAssetImageGenerator(asset: asset)
+        generator.appliesPreferredTrackTransform = true
+        if let imageRef = try? generator.copyCGImage(at: player.currentTime(), actualTime: nil) {
+            return UIImage(cgImage: imageRef)
+        }
+        return nil
     }
 }
