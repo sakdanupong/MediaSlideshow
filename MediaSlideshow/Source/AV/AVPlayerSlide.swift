@@ -16,7 +16,7 @@ public protocol AVPlayerSlideDelegate: AnyObject {
 }
 
 public class AVPlayerSlide: UIView, MediaSlideshowSlide {
-    weak var delegate: AVPlayerSlideDelegate?
+    public weak var delegate: AVPlayerSlideDelegate?
 
     public let playerController: AVPlayerViewController
     private let transitionView: UIImageView
