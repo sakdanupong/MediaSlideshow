@@ -15,7 +15,7 @@ public protocol AVPlayerSlideDelegate: AnyObject {
     func slideDidDisappear(_ slide: AVPlayerSlide)
 }
 
-public class AVPlayerSlide: UIView, MediaSlideshowSlide {
+open class AVPlayerSlide: UIView, MediaSlideshowSlide {
     public weak var delegate: AVPlayerSlideDelegate?
 
     public let playerController: AVPlayerViewController
