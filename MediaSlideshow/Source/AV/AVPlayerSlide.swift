@@ -16,7 +16,7 @@ public protocol AVPlayerSlideDelegate: AnyObject {
 }
 
 open class AVPlayerSlide: UIView, MediaSlideshowSlide {
-    public weak var delegate: AVPlayerSlideDelegate?
+    open weak var delegate: AVPlayerSlideDelegate?
 
     public let playerController: AVPlayerViewController
     private let transitionView: UIImageView
@@ -52,32 +52,32 @@ open class AVPlayerSlide: UIView, MediaSlideshowSlide {
 
     // MARK: - MediaSlideshowSlide
 
-    public var mediaContentMode: UIView.ContentMode {
+    open var mediaContentMode: UIView.ContentMode {
         didSet {
             setPlayerViewVideoGravity()
         }
     }
 
-    public func willBeRemoved() {
+    open func willBeRemoved() {
         playerController.player?.pause()
     }
 
-    public func loadMedia() {}
+    open func loadMedia() {}
 
-    public func releaseMedia() {}
+    open func releaseMedia() {}
 
-    public func transitionImageView() -> UIImageView {
+    open func transitionImageView() -> UIImageView {
         transitionView.frame = playerController.videoBounds
         transitionView.contentMode = mediaContentMode
         transitionView.image = delegate?.currentThumbnail(self)
         return transitionView
     }
 
-    public func didAppear() {
+    open func didAppear() {
         delegate?.slideDidAppear(self)
     }
 
-    public func didDisappear() {
+    open func didDisappear() {
         delegate?.slideDidDisappear(self)
     }
 
